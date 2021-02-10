@@ -2,7 +2,7 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](Images/diagram_filename.png)
+![TODO: Update the path with the name of your diagram](Diagrams/Elk-Diagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -31,22 +31,23 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name     | Function         | IP Address | OS    |
+|----------|------------------|------------|-------|
+| Jump-Box | Gateway          | 10.0.0.4   | Linux |
+| Web-1    | DVWA Containers  | 10.0.0.5   | Linux |
+| Web-2    | DVWA Containers  | 10.0.0.6   | Linux |
+| Web-3    | DVWA Containers  | 10.0.0.7   | Linux |
+| ELK      | Configuration VM | 10.1.0.4   | Linux |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- 23.241.224.203 - My Router IP
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by accessing the container in the Jump Box VM.
+- The only machines allowed to access the ELK server are 23.241.224.203, my Router IP, and the Jump Box VM at 10.0.0.4 (Private IP) thorugh a peering connection.
 
 A summary of the access policies in place can be found in the table below.
 
