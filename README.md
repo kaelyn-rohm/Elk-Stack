@@ -6,7 +6,7 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the .yml file may be used to install only certain pieces of it, such as Filebeat.
 
-  - [Filbeat playbook](filebeat-playbook.yml)
+  - [Filbeat playbook](Ansible-Playbooks/filebeat-playbook.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -27,28 +27,28 @@ Load balancing ensures that the application will be highly reliable, in addition
 
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
-- What does Filebeat watch for? Filebeat monitors monitors logfiles and location that you specify and forwards them for 
-- _TODO: What does Metricbeat record?_
+- What does Filebeat watch for? Filebeat monitors logfiles and locations that you specify and forwards them for indexing.
+- What does Metricbeat record? Metricbeat records metric data from servers such as CPU, memory, or services.
 
 The configuration details of each machine may be found below.
 
-| Name     | Function         | IP Address | OS    |
-|----------|------------------|------------|-------|
-| Jump-Box | Gateway          | 10.0.0.4   | Linux |
-| Web-1    | DVWA Containers  | 10.0.0.5   | Linux |
-| Web-2    | DVWA Containers  | 10.0.0.6   | Linux |
-| Web-3    | DVWA Containers  | 10.0.0.7   | Linux |
-| ELK      | Configuration VM | 10.1.0.4   | Linux |
+| Name     | Function                | IP Address | OS    |
+|----------|-------------------------|------------|-------|
+| Jump-Box | Gateway                 | 10.0.0.4   | Linux |
+| Web-1    | Docker-DVWA Containers  | 10.0.0.5   | Linux |
+| Web-2    | Docker-DVWA Containers  | 10.0.0.6   | Linux |
+| Web-3    | Docker-DVWA Containers  | 10.0.0.7   | Linux |
+| ELK      | Configuration VM        | 10.1.0.4   | Linux |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- 23.241.224.203 - My Personal IP
+- My Personal IP (Router IP)
 
 Machines within the network can only be accessed by accessing the container in the Jump Box VM.
-- The only machines allowed to access the ELK server are 23.241.224.203, my Personal IP, and the Jump Box VM at 10.0.0.4 (Private IP) thorugh a peering connection.
+- The only machines allowed to access the ELK server are my Personal IP and the Jump Box VM at 10.0.0.4 (Private IP) thorugh a peering connection.
 
 A summary of the access policies in place can be found in the table below.
 
@@ -62,17 +62,18 @@ A summary of the access policies in place can be found in the table below.
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because you can use the configuration file to comfigure many machines after intial configuration, reducing time spent and potential misconfiguration.
 
-The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+The [Elk-Playbook](Ansible-Playbooks/install_elk.yml) implements the following tasks:
+- Runs this playbook against the "elk" group configured in the Ansible host file.
+- Installs docker.io, python3-pip, and docker (which is the Docker Python pip module).
+- Increases the virtual memory and increases the virtual memory on restart.
+- Downloads and installs the docker elk container.
+- Enables service docker on boot.
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![Path with the name of docker ps output](Images/docker_ps.png)
+![Docker ps -a](Images/docker_ps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
