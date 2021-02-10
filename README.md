@@ -4,9 +4,9 @@ The files in this repository were used to configure the network depicted below.
 
 ![Elk-Diagram](Diagrams/Elk-Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the .yml file may be used to install only certain pieces of it, such as Filebeat.
 
-  - ![TODO: Update the path with the name of your filbeat playbook](filebeat-playbook.yml)
+  - ![Filbeat playbook](filebeat-playbook.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -21,10 +21,11 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
+Load balancing ensures that the application will be highly reliable, in addition to restricting access to the network.
 - _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
+
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
 - _TODO: What does Filebeat watch for?_
 - _TODO: What does Metricbeat record?_
 
@@ -51,11 +52,13 @@ Machines within the network can only be accessed by accessing the container in t
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name     | Publicly Accessible? | Allowed IP Addresses     |
+|----------|----------------------|--------------------------|
+| Jump-Box | No                   | Personal IP              |
+| Web-1    | No                   | 10.0.0.4                 |
+| Web-2    | No                   | 10.0.0.4                 |
+| Web-3    | No                   | 10.0.0.4                 |
+| ELK      | No                   | 10.0.0.4 and Personal IP |
 
 ### Elk Configuration
 
