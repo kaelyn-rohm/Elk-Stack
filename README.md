@@ -95,6 +95,7 @@ SSH into the control node and follow the steps below:
 - Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) to the /etc/ansible/files directory.
 - Copy the filebeat-playbook.yml file to /etc/ansible/roles.
 - Update the filebeat-config.yml file to include your ELK servers private IP address in line 1106 and 1806.
+- Update the metricbeat-config.yml file to include your ELK servers private IP address in line 62 and 95.
 - Run the playbook, and navigate to kibana at [ELK public IP]/app/kibana to check that the installation worked as expected.
 
 
