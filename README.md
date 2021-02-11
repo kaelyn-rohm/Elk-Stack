@@ -65,7 +65,7 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because you can use the configuration file to comfigure many machines after intial configuration, reducing time spent and potential misconfiguration.
 
 The [Elk-Playbook](Ansible-Playbooks/install_elk.yml) implements the following tasks:
-- Runs this playbook against the "elk" group configured in the Ansible host file (verify you have this configured in the /etc/ansible/hosts file).
+- Runs this playbook against the "elk" group configured in the Ansible host file. Ex. [here](Ansible-Configs/hosts)
 - Installs docker.io, python3-pip, and docker (which is the Docker Python pip module).
 - Increases the virtual memory and increases the virtual memory on restart.
 - Downloads and installs the docker elk container.
@@ -92,7 +92,7 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Modify the /etc/ansible/hosts file to include your VMs Private IP addresses under the "webserver" group. Ex. [here](Ansible-Configs/hosts)
+- Modify the /etc/ansible/hosts file to include your VMs Private IP addresses under the "webservers" group. Ex. [here](Ansible-Configs/hosts)
 - Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) files to the /etc/ansible/files directory.
 - Copy the [filebeat-playbook.yml](Ansible-Playbooks/filebeat-playbook.yml) and [metricbeat-playbook.yml](Ansible-Playbooks/metricbeat-playbook.yml) files to /etc/ansible/roles.
 - Update the filebeat-config.yml file to include your ELK servers private IP address in line 1106 and 1806.
