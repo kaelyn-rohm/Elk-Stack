@@ -4,9 +4,9 @@ The files in this repository were used to configure the network depicted below.
 
 ![Elk-Diagram](Diagrams/Elk-Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the .yml file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the .yml files may be used to install only certain pieces of it, such as Filebeat.
 
-  - [Filbeat playbook](Ansible-Playbooks/filebeat-playbook.yml)
+  - [Filebeat playbook](Ansible-Playbooks/filebeat-playbook.yml)
 
 This document contains the following details:
 - Description of the Topology
@@ -92,12 +92,12 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Modify the /etc/ansible/hosts file to include your VMs Private IP addresses under the [webserver] group.
-- Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) to the /etc/ansible/files directory.
-- Copy the filebeat-playbook.yml file to /etc/ansible/roles.
+- Modify the /etc/ansible/hosts file to include your VMs Private IP addresses under the "webserver" group. Ex. [here](Ansible-Configs/hosts)
+- Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) files to the /etc/ansible/files directory.
+- Copy the [filebeat-playbook.yml](Ansible-Playbooks/filebeat-playbook.yml) and [metricbeat-playbook.yml](Ansible-Playbooks/metricbeat-playbook.yml) files to /etc/ansible/roles.
 - Update the filebeat-config.yml file to include your ELK servers private IP address in line 1106 and 1806.
 - Update the metricbeat-config.yml file to include your ELK servers private IP address in line 62 and 95.
-- Run the playbook, and navigate to kibana at [ELK public IP]/app/kibana to check that the installation worked as expected.
+- Run the playbooks using `ansible-playbook filebeat-playbook.yml` and `ansible-playbook metricbeat-playbook.yml`, and navigate to kibana at [ELK public IP]/app/kibana to check that the installation worked as expected.
 
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
