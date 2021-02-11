@@ -11,4 +11,4 @@ This error was also logged and sent to Kibana.
 Run the failed SSH command in a loop to generate failed login log entries.
 
 Search through the logs in Kibana to locate your generated failed login attempts.
-![SSH](Images/SSH_Barrage)
+![SSH](Images/SSH_Barrage.png)
