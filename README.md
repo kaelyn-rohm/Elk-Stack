@@ -77,18 +77,22 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- Web-1 (10.0.0.5)
+- Web-2 (10.0.0.6)
+- Web-3 (10.0.0.7)
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat v7.4.0 and Metricbeat v7.4.0
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat forwards and centralizes log data by monitoring log files and locations, logging events, and forwarding them to Elasticsearch for indexing.
+- Metricbeat gathers metrics from the operating system and from services running on the server(s) you configured, then sends them to the output you specify.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
+- Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) to the /etc/ansible/files directory.
 - Copy the filebeat-playbook.yml file to /etc/ansible/roles.
 - Update the filebeat-config.yml file to include your ELK servers private IP address in line 1106 and 1806.
 - Run the playbook, and navigate to kibana at [ELK public IP]/app/kibana to check that the installation worked as expected.
