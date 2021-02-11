@@ -21,12 +21,12 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly reliable, in addition to restricting access to the network.
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 - What aspect of security do load balancers protect? Load balancers within a network provide redundancy in this case, contributing to the Availability aspect of the CIA security triad. Load balancers protect your servers from DoS attacks and other risks since the load balancer is the only IP exposed to the internet.  
 - What is the advantage of a jump box? "Jump boxes" or SAWs (Secure Admin Workstations) creates a single point of origin before connecting to any other servers, networks, or performing any administrative tasks. Properly configured jump boxes allow us to limit who can access the jump box and what the jump box has access to, creating a much more secure network.
 
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file systems and system traffic.
 - What does Filebeat watch for? Filebeat monitors logfiles and locations that you specify and forwards them for indexing.
 - What does Metricbeat record? Metricbeat records metric data from servers such as CPU, memory, or services.
 
@@ -65,7 +65,7 @@ A summary of the access policies in place can be found in the table below.
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because you can use the configuration file to comfigure many machines after intial configuration, reducing time spent and potential misconfiguration.
 
 The [Elk-Playbook](Ansible-Playbooks/install_elk.yml) implements the following tasks:
-- Runs this playbook against the "elk" group configured in the Ansible host file.
+- Runs this playbook against the "elk" group configured in the Ansible host file (verify you have this configured in the /etc/ansible/hosts file).
 - Installs docker.io, python3-pip, and docker (which is the Docker Python pip module).
 - Increases the virtual memory and increases the virtual memory on restart.
 - Downloads and installs the docker elk container.
@@ -92,6 +92,7 @@ These Beats allow us to collect the following information from each machine:
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
+- Modify the /etc/ansible/hosts file to include your VMs Private IP addresses under the [webserver] group.
 - Copy the [filebeat-config.yml](Ansible-Configs/filebeat-config.yml) and [metricbeat-config.yml](Ansible-Configs/metricbeat-config.yml) to the /etc/ansible/files directory.
 - Copy the filebeat-playbook.yml file to /etc/ansible/roles.
 - Update the filebeat-config.yml file to include your ELK servers private IP address in line 1106 and 1806.
