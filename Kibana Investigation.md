@@ -23,3 +23,17 @@ Run `sudo stress --cpu 1` and allow stress to run for a few minutes.
 View the Metrics page for that VM in Kibana. 
 ![Stress CPU](Images/Stress_CPU.png)
 ![Stress Load](Images/Stress_Load.png)
+
+### wget-DOS
+Log into your jump box.
+Run `wget ip.of.web.vm.`
+
+Run `ls` to view the file you downloaded from your web VM to your jump box.
+``` sysadmin@Jump-Box-Provisioner:~$ ls```
+```index.html ```
+
+Run the `wget` command in a loop to generate many web requests.
+
+Open the Metrics page for the web machine you attacked and answer the following questions:
+
+Which of the VM metrics were affected the most from this traffic?
