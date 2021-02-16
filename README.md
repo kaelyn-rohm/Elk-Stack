@@ -103,40 +103,40 @@ SSH into the control node and follow the steps below:
 Commands to execute the previous steps are:
 ## Commands to download the playbook and update files
 SSH into JumpBoxProvisioner from Local Desktop:
-`ssh azureuser@Jumpbox_IP`
+``ssh azureuser@Jumpbox_IP``
 
 View list of docker containers:
-`sudo docker container list -a`
+``sudo docker container list -a``
 
 Start docker:
-`sudo docker start (container name)`
+``sudo docker start (container name)``
 
 Attach to docker:
-`sudo docker attach (container name)`
+``sudo docker attach (container name)``
 
 Add DVWAs to hosts file:
-`nano /etc/ansible/hosts`
+``nano /etc/ansible/hosts``
 (Add Web Private IPs under [webservers] and Elk Private IPs under [elk])
 
 Run playbook to update elk:
-`ansible-playbook /etc/ansible/install_elk.yml`
+``ansible-playbook /etc/ansible/install_elk.yml``
 
 Copy filebeat and metricbeat configuration file:
-`cp filebeat-config.yml /etc/ansible/files`
-`cp metricbeat-config.yml /etc/ansible/files`
+``cp filebeat-config.yml /etc/ansible/files``
+``cp metricbeat-config.yml /etc/ansible/files``
 
 Update configuration files to include ELK server IP:
-`nano /etc/ansible/files/filebeat-config.yml` modify lines 1106 and 1806
-`nano /etc/ansible/files/metricbeat-config.yml` modify lines 62 and 95
+``nano /etc/ansible/files/filebeat-config.yml`` modify lines 1106 and 1806
+``nano /etc/ansible/files/metricbeat-config.yml`` modify lines 62 and 95
 
 Copy the playbook files:
-`cp filebeat-playbook.yml /etc/ansible/roles`
-`cp metricbeat-playbook.yml /etc/ansible/roles`
+``cp filebeat-playbook.yml /etc/ansible/roles``
+``cp metricbeat-playbook.yml /etc/ansible/roles``
 
 Run the beats playbooks:
-`ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
-`ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+``ansible-playbook /etc/ansible/roles/filebeat-playbook.yml``
+``ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml``
 
 Open Kibana in browser:
 
-http://Elk_public_IP:5601/
+http://[Elk.IP]:5601/app/kibana
