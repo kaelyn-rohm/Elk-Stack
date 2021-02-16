@@ -71,7 +71,7 @@ The [Elk-Playbook](Ansible-Playbooks/install_elk.yml) implements the following t
 - Downloads and installs the docker elk container.
 - Enables service docker on boot.
 
-The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+After the ELK container is installed, SSH to your Elk machine. The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 ![Docker ps -a](Images/docker_ps.png)
 
@@ -88,7 +88,7 @@ These Beats allow us to collect the following information from each machine:
 - Filebeat forwards and centralizes log data by monitoring log files and locations, logging events, and forwarding them to Elasticsearch for indexing.
 - Metricbeat gathers metrics from the operating system and from services running on the server(s) you configured, then sends them to the output you specify.
 
-### Using the Playbook
+### Using the Beats Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
@@ -100,4 +100,43 @@ SSH into the control node and follow the steps below:
 - Run the playbooks using `ansible-playbook filebeat-playbook.yml` and `ansible-playbook metricbeat-playbook.yml`, and navigate to kibana at [ELK public IP]/app/kibana to check that the installation worked as expected.
 
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+Commands to execute the previous steps are:
+## Commands to download the playbook and update files
+SSH into JumpBoxProvisioner from Local Desktop:
+`ssh azureuser@Jumpbox_IP`
+
+View list of docker containers:
+`sudo docker container list -a`
+
+Start docker:
+`sudo docker start (container name)`
+
+Attach to docker:
+`sudo docker attach (container name)`
+
+Add DVWAs to hosts file:
+`nano /etc/ansible/hosts`
+(Add Web Private IPs under [webservers] and Elk Private IPs under [elk])
+
+Run playbook to update elk:
+`ansible-playbook /etc/ansible/install_elk.yml`
+
+Copy filebeat and metricbeat configuration file:
+`cp filebeat-config.yml /etc/ansible/files`
+`cp metricbeat-config.yml /etc/ansible/files`
+
+Update configuration files to include ELK server IP:
+`nano /etc/ansible/files/filebeat-config.yml` modify lines 1106 and 1806
+`nano /etc/ansible/files/metricbeat-config.yml` modify lines 62 and 95
+
+Copy the playbook files:
+`cp filebeat-playbook.yml /etc/ansible/roles`
+`cp metricbeat-playbook.yml /etc/ansible/roles`
+
+Run the beats playbooks:
+`ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+`ansible-playbook /etc/ansible/roles/metricbeat-playbook.yml`
+
+Open Kibana in browser:
+
+http://Elk_public_IP:5601/
